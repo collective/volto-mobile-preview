@@ -31,6 +31,11 @@ const messages = defineMessages({
     id: 'Close',
     defaultMessage: 'Chiudi',
   },
+  helpText: {
+    id: 'Mobile preview help text',
+    defaultMessage:
+      "Puoi cambiare le dimensioni dell'anteprima scegliendo un dispositivo dal menu, modificando i valori negli input oppure trascinando manualmente l'angolo dell'anteprima.",
+  },
 });
 
 const RESIZABLE_ENABLE = {
@@ -57,9 +62,16 @@ const deviceOptions = (intl) => [
   },
 ];
 
-// The iframe shares the current session, so Volto renders its own
-// editing toolbar/sidebar inside the preview too. Same-origin, so we can
-// reach in and hide them once the preview document has loaded.
+// `credentialless` (Chrome/Edge only, as of writing) loads the iframe
+// without forwarding cookies/storage, so Volto renders it exactly as an
+// anonymous visitor would see it (no editing toolbar) - no CSS hiding
+// needed. Browsers without support (Firefox, Safari) fall back to a normal
+// same-origin, cookie-forwarded load, so the toolbar has to be hidden by
+// reaching into the (same-origin) iframe document once it has loaded.
+const supportsCredentialless =
+  typeof document !== 'undefined' &&
+  'credentialless' in document.createElement('iframe');
+
 const hideToolbarInPreview = (event) => {
   const doc = event.target.contentDocument;
   if (!doc) {
@@ -125,7 +137,7 @@ const MobilePreviewModal = ({ contentUrl, onClose }) => {
               onChange={setDimension(setWidth)}
             />
             <span className="unit">px</span>
-            <span className="separator" />
+            <span className="mobile-preview-separator">×</span>
             <Input
               type="number"
               min="300"
@@ -136,6 +148,9 @@ const MobilePreviewModal = ({ contentUrl, onClose }) => {
             <span className="unit">px</span>
           </div>
         </div>
+        <p className="mobile-preview-help-text">
+          {intl.formatMessage(messages.helpText)}
+        </p>
         <div className="mobile-preview-frame-wrapper">
           <Resizable
             size={{ width, height }}
@@ -155,7 +170,8 @@ const MobilePreviewModal = ({ contentUrl, onClose }) => {
               src={contentUrl}
               title={intl.formatMessage(messages.title)}
               className="mobile-preview-iframe"
-              onLoad={hideToolbarInPreview}
+              credentialless={supportsCredentialless ? 'true' : undefined}
+              onLoad={supportsCredentialless ? undefined : hideToolbarInPreview}
             />
           </Resizable>
         </div>

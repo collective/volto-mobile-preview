@@ -9,8 +9,23 @@
 
 .mobile-preview-modal.ui.modal {
   z-index: 10001;
+  // Volto core sets `position: fixed; margin: 0 auto;` on `.ui.modal` but
+  // never sets `left`/`right`, so the auto margins have nothing to resolve
+  // against and the browser falls back to the element's static position
+  // (flush left). Supplying left/right completes the classic fixed-position
+  // centering recipe.
+  left: 0;
+  right: 0;
+  // The pastanaga theme's `.ui.large.modal` breakpoint rule (modal.variables)
+  // sets `margin: 0 0 0 -halfWidth` — a legacy "left: 50%" centering
+  // technique that doesn't apply here and, at the same 3-class specificity,
+  // wins over the plain `.ui.modal { margin: 0 auto }` override. Force ours.
+  margin: 0 auto !important;
 
   > .close.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     top: 0.5rem;
     right: 0.5rem;
     padding: 0.4rem;
@@ -18,6 +33,7 @@
     background: rgba(0, 0, 0, 0.6);
     border-radius: 50%;
     font-size: 1.1rem;
+    line-height: 1;
   }
 
   .mobile-preview-controls {
@@ -25,14 +41,26 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 
     label {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       font-weight: bold;
+      flex: 1 1 auto;
+
+      .ui.dropdown {
+        width: 50%;
+        min-width: 200px;
+      }
     }
+  }
+
+  .mobile-preview-help-text {
+    margin: 0 0 1rem;
+    color: #767676;
+    font-size: 0.85rem;
   }
 
   .mobile-preview-dimensions {
@@ -44,12 +72,18 @@
     margin-left: auto;
 
     input {
-      width: 4.5rem;
-      text-align: right;
+      width: 4rem;
+      padding: 0.35rem 0.4rem;
+      text-align: center;
     }
 
     .unit {
       color: #767676;
+    }
+
+    .mobile-preview-separator {
+      color: #767676;
+      font-weight: bold;
     }
   }
 
