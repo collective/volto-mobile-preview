@@ -9,13 +9,13 @@ import { getBaseUrl, userHasRoles } from '@plone/volto/helpers';
 import config from '@plone/volto/registry';
 import { Button } from 'semantic-ui-react';
 
-import MobilePreviewModal from './MobilePreviewModal';
+import MobilePreviewModal, { MOBILE_PREVIEW_DIALOG_ID } from './MobilePreviewModal';
 import mobileSVG from '@plone/volto/icons/mobile.svg';
 
 const messages = defineMessages({
   mobilePreview: {
     id: 'Mobile preview',
-    defaultMessage: 'Anteprima mobile',
+    defaultMessage: 'Mobile preview',
   },
 });
 
@@ -48,6 +48,9 @@ const MobilePreviewToolbarButton = (props) => {
       <Plug pluggable="main.toolbar.bottom" id="mobile-preview-btn">
         <Button
           aria-label={intl.formatMessage(messages.mobilePreview)}
+          aria-haspopup="dialog"
+          aria-expanded={isOpen}
+          aria-controls={MOBILE_PREVIEW_DIALOG_ID}
           className="mobile-preview-toolbar-button"
           onClick={() => setIsOpen(true)}
           tabIndex={0}

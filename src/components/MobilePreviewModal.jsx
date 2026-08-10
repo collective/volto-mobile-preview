@@ -6,35 +6,40 @@ import { BodyClass } from '@plone/volto/helpers';
 
 import { devicePresets, defaultDevice, CUSTOM_DEVICE } from './devicePresets';
 
+export const MOBILE_PREVIEW_DIALOG_ID = 'mobile-preview-dialog';
+const TITLE_ID = 'mobile-preview-title';
+const HELP_TEXT_ID = 'mobile-preview-help-text';
+const DEVICE_LABEL_ID = 'mobile-preview-device-label';
+
 const messages = defineMessages({
   title: {
     id: 'Mobile preview',
-    defaultMessage: 'Anteprima mobile',
+    defaultMessage: 'Mobile preview',
   },
   device: {
     id: 'Device',
-    defaultMessage: 'Dispositivo',
+    defaultMessage: 'Device',
   },
   custom: {
     id: 'Custom',
-    defaultMessage: 'Personalizzata',
+    defaultMessage: 'Custom',
   },
   width: {
     id: 'Width',
-    defaultMessage: 'Larghezza',
+    defaultMessage: 'Width in pixels',
   },
   height: {
     id: 'Height',
-    defaultMessage: 'Altezza',
+    defaultMessage: 'Height in pixels',
   },
   close: {
     id: 'Close',
-    defaultMessage: 'Chiudi',
+    defaultMessage: 'Close',
   },
   helpText: {
     id: 'Mobile preview help text',
     defaultMessage:
-      "Puoi cambiare le dimensioni dell'anteprima scegliendo un dispositivo dal menu, modificando i valori negli input oppure trascinando manualmente l'angolo dell'anteprima.",
+      'Change the preview size by choosing a device from the menu, editing the values on the right, or dragging the corner of the preview.',
   },
 });
 
@@ -109,25 +114,47 @@ const MobilePreviewModal = ({ contentUrl, onClose }) => {
   };
 
   return (
-    <Modal open onClose={onClose} closeIcon size="large" className="mobile-preview-modal">
+    <Modal
+      open
+      onClose={onClose}
+      closeIcon={{
+        name: 'close',
+        role: 'button',
+        tabIndex: 0,
+        'aria-label': intl.formatMessage(messages.close),
+      }}
+      size="large"
+      className="mobile-preview-modal"
+      id={MOBILE_PREVIEW_DIALOG_ID}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={TITLE_ID}
+      aria-describedby={HELP_TEXT_ID}
+    >
       {/* design-comuni-plone-theme styles Semantic modals correctly only
       under body.cms-ui (Bootstrap Italia is compiled under .public-ui and
       collides with Semantic's generic class names otherwise). Switch into
       that scope for as long as this modal is mounted, revert on close. */}
       <BodyClass className="cms-ui" />
       <BodyClass className="public-ui" remove />
-      <Modal.Header>{intl.formatMessage(messages.title)}</Modal.Header>
+      <Modal.Header id={TITLE_ID}>
+        {intl.formatMessage(messages.title)}
+      </Modal.Header>
       <Modal.Content>
+        <p className="mobile-preview-help-text" id={HELP_TEXT_ID}>
+          {intl.formatMessage(messages.helpText)}
+        </p>
         <div className="mobile-preview-controls">
-          <label>
+          <span id={DEVICE_LABEL_ID} className="mobile-preview-device-label">
             {intl.formatMessage(messages.device)}
-            <Dropdown
-              selection
-              value={selectedDevice}
-              options={deviceOptions(intl)}
-              onChange={(event, { value }) => selectDevice(value)}
-            />
-          </label>
+          </span>
+          <Dropdown
+            selection
+            value={selectedDevice}
+            options={deviceOptions(intl)}
+            onChange={(event, { value }) => selectDevice(value)}
+            aria-labelledby={DEVICE_LABEL_ID}
+          />
           <div className="mobile-preview-dimensions">
             <Input
               type="number"
@@ -136,8 +163,12 @@ const MobilePreviewModal = ({ contentUrl, onClose }) => {
               aria-label={intl.formatMessage(messages.width)}
               onChange={setDimension(setWidth)}
             />
-            <span className="unit">px</span>
-            <span className="mobile-preview-separator">×</span>
+            <span className="unit" aria-hidden="true">
+              px
+            </span>
+            <span className="mobile-preview-separator" aria-hidden="true">
+              ×
+            </span>
             <Input
               type="number"
               min="300"
@@ -145,12 +176,11 @@ const MobilePreviewModal = ({ contentUrl, onClose }) => {
               aria-label={intl.formatMessage(messages.height)}
               onChange={setDimension(setHeight)}
             />
-            <span className="unit">px</span>
+            <span className="unit" aria-hidden="true">
+              px
+            </span>
           </div>
         </div>
-        <p className="mobile-preview-help-text">
-          {intl.formatMessage(messages.helpText)}
-        </p>
         <div className="mobile-preview-frame-wrapper">
           <Resizable
             size={{ width, height }}
