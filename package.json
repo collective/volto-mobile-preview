@@ -4,6 +4,8 @@
   "description": "volto-mobile-preview: Volto add-on",
   "main": "src/index.js",
   "license": "MIT",
+  "author": "collective",
+  "repository": "https://github.com/collective/volto-mobile-preview.git",
   "keywords": [
     "volto-addon",
     "volto",
