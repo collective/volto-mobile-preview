@@ -1,7 +1,7 @@
 {
   "name": "volto-mobile-preview",
   "version": "0.1.0",
-  "description": "volto-mobile-preview: mobile/tablet responsive preview for content editors",
+  "description": "volto-mobile-preview: Volto add-on",
   "main": "src/index.js",
   "license": "MIT",
   "keywords": [
@@ -25,8 +25,8 @@
     "re-resizable": "^6.9.11"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "7.23.10",
     "@plone/scripts": "^3.5.0",
+    "@babel/eslint-parser": "7.23.10",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-react-app": "^7.0.1",
@@ -39,13 +39,13 @@
     "postcss-less": "6.0.0",
     "postcss-scss": "4.0.9",
     "prettier": "3.2.5",
-    "release-it": "^17.1.1",
+    "release-it": "^20.0.1",
     "stylelint": "16.2.1",
     "stylelint-config-idiomatic-order": "10.0.0",
     "stylelint-config-sass-guidelines": "11.0.0",
     "stylelint-prettier": "5.0.0"
   },
   "peerDependencies": {
-    "@plone/volto": "^17.0.0"
+    "@plone/volto": "^18.0.0"
   }
 }
