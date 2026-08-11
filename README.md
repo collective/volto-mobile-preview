@@ -2,9 +2,10 @@
 
 ## Introduction
 
-`volto-mobile-preview` adds a "mobile preview" button to the Volto toolbar, letting content
-editors preview how a saved/published page will look on a phone or tablet without leaving
-the backend.
+`volto-mobile-preview` adds a preview button to the Volto toolbar, letting editors preview
+how content will look at different screen sizes (mobile, tablet, desktop) without leaving
+the backend. Width and height can be set manually or picked from a list of predefined
+device sizes.
 
 ![Mobile preview in action](./docs/mobile-preview.png)
 

@@ -10,6 +10,7 @@ export const MOBILE_PREVIEW_DIALOG_ID = 'mobile-preview-dialog';
 const TITLE_ID = 'mobile-preview-title';
 const HELP_TEXT_ID = 'mobile-preview-help-text';
 const DEVICE_LABEL_ID = 'mobile-preview-device-label';
+const FRAME_ID = 'mobile-preview-frame';
 
 const messages = defineMessages({
   title: {
@@ -154,6 +155,7 @@ const MobilePreviewModal = ({ contentUrl, onClose }) => {
             options={deviceOptions(intl)}
             onChange={(event, { value }) => selectDevice(value)}
             aria-labelledby={DEVICE_LABEL_ID}
+            aria-controls={FRAME_ID}
           />
           <div className="mobile-preview-dimensions">
             <Input
@@ -161,6 +163,7 @@ const MobilePreviewModal = ({ contentUrl, onClose }) => {
               min="200"
               value={width}
               aria-label={intl.formatMessage(messages.width)}
+              aria-controls={FRAME_ID}
               onChange={setDimension(setWidth)}
             />
             <span className="unit" aria-hidden="true">
@@ -174,6 +177,7 @@ const MobilePreviewModal = ({ contentUrl, onClose }) => {
               min="300"
               value={height}
               aria-label={intl.formatMessage(messages.height)}
+              aria-controls={FRAME_ID}
               onChange={setDimension(setHeight)}
             />
             <span className="unit" aria-hidden="true">
@@ -197,6 +201,7 @@ const MobilePreviewModal = ({ contentUrl, onClose }) => {
             className="mobile-preview-resizable"
           >
             <iframe
+              id={FRAME_ID}
               src={contentUrl}
               title={intl.formatMessage(messages.title)}
               className="mobile-preview-iframe"
