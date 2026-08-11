@@ -2,6 +2,34 @@
 
 ## Introduction
 
+`volto-mobile-preview` adds a preview button to the Volto toolbar, letting editors preview
+how content will look at different screen sizes (mobile, tablet, desktop) without leaving
+the backend. Width and height can be set manually or picked from a list of predefined
+device sizes.
+
+![Mobile preview in action](./docs/mobile-preview.png)
+
+### Features
+
+- Button in the Volto toolbar, available both in edit and view mode
+- Only visible to users with the `Editor` role (configurable, see below)
+- Preview reflects the saved/published content, not unsaved draft changes
+- Device-size presets (iPhone, iPad, Galaxy, Desktop, ...) or manual width/height in pixels
+- Manual resize by dragging the corner of the preview frame
+- The previewed page loads without the editing toolbar: on Chrome/Edge it loads with
+  `credentialless`, i.e. without forwarding cookies/session, so it renders exactly as an
+  anonymous visitor would see it; on browsers without `credentialless` support the toolbar
+  is hidden instead
+
+### Configuration
+
+By default, only users with the `Editor` role can see the preview button. Override the list
+of allowed roles from your project's own `config.js` (applied after addons):
+
+```js
+config.settings.mobilePreviewRoles = ['Editor', 'Contributor'];
+```
+
 ## Development
 
 You can develop an add-on in isolation using the boilerplate already provided by the add-on generator.

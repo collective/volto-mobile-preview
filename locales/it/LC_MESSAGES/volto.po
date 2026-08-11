@@ -1,50 +1,53 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2026-08-10T14:28:34.562Z\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
+"Language: \n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
+"Language-Code: it\n"
+"Language-Name: Italiano\n"
 "Preferred-Encodings: utf-8\n"
 "Domain: volto\n"
 
 #. Default: "Close"
 #: components/MobilePreviewModal
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 #. Default: "Custom"
 #: components/MobilePreviewModal
 msgid "Custom"
-msgstr ""
+msgstr "Personalizzata"
 
 #. Default: "Device"
 #: components/MobilePreviewModal
 msgid "Device"
-msgstr ""
+msgstr "Dispositivo"
 
 #. Default: "Height in pixels"
 #: components/MobilePreviewModal
 msgid "Height"
-msgstr ""
+msgstr "Altezza in pixel"
 
 #. Default: "Mobile preview"
 #: components/MobilePreviewModal
 #: components/MobilePreviewToolbarButton
 msgid "Mobile preview"
-msgstr ""
+msgstr "Anteprima mobile"
 
 #. Default: "Change the preview size by choosing a device from the menu, editing the values on the right, or dragging the corner of the preview."
 #: components/MobilePreviewModal
 msgid "Mobile preview help text"
-msgstr ""
+msgstr "Puoi cambiare le dimensioni dell'anteprima scegliendo un dispositivo dal menu, modificando i valori negli input oppure trascinando manualmente l'angolo dell'anteprima."
 
 #. Default: "Width in pixels"
 #: components/MobilePreviewModal
 msgid "Width"
-msgstr ""
+msgstr "Larghezza in pixel"
