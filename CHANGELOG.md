@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.1](https://github.com/collective/volto-mobile-preview/compare/v1.0.0...v1.0.1) (2026-08-12)
+
+### Bug Fixes
+
+* ci ([6b57b21](https://github.com/collective/volto-mobile-preview/commit/6b57b21ac3b6165ddad100822bbfc768dce2a97b))
+
 ## 1.0.0 (2026-08-12)
 
 ### Bug Fixes
