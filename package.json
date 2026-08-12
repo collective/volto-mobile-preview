@@ -27,6 +27,7 @@
     "release-rc": "release-it --preRelease=rc"
   },
   "dependencies": {
+    "@release-it/conventional-changelog": "^12.0.0",
     "re-resizable": "^6.9.11"
   },
   "devDependencies": {
