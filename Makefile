@@ -24,8 +24,8 @@ YELLOW=`tput setaf 3`
 PLONE_VERSION=6
 VOLTO_VERSION=17.0.0
 
-ADDON_NAME='volto-mobile-preview'
-ADDON_PATH='volto-mobile-preview'
+ADDON_NAME='@plone-collective/volto-mobile-preview'
+ADDON_PATH='@plone-collective/volto-mobile-preview'
 COMPOSE_FILE=dockerfiles/docker-compose.yml
 ACCEPTANCE_COMPOSE=acceptance/docker-compose.yml
 CMD=CURRENT_DIR=${CURRENT_DIR} ADDON_NAME=${ADDON_NAME} ADDON_PATH=${ADDON_PATH} VOLTO_VERSION=${VOLTO_VERSION} PLONE_VERSION=${PLONE_VERSION} docker compose

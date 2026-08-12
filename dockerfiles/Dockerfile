@@ -21,7 +21,7 @@ FROM plone/frontend-prod-config:${VOLTO_VERSION}
 
 LABEL maintainer="maintainer <maintainer@plone.org>" \
       org.label-schema.name="ghcr.io/voltomobile-preview" \
-      org.label-schema.description="Volto project with volto-mobile-preview" \
+      org.label-schema.description="Volto project with @plone-collective/volto-mobile-preview" \
       org.label-schema.vendor="Plone CMS"
 
 COPY --from=builder /app/ /app/

@@ -1,11 +1,14 @@
 {
-  "name": "volto-mobile-preview",
+  "name": "@plone-collective/volto-mobile-preview",
   "version": "0.1.0",
-  "description": "volto-mobile-preview: Volto add-on",
+  "description": "@plone-collective/volto-mobile-preview: Volto add-on",
   "main": "src/index.js",
   "license": "MIT",
   "author": "collective",
-  "repository": "https://github.com/collective/volto-mobile-preview.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/collective/volto-mobile-preview"
+  },
   "keywords": [
     "volto-addon",
     "volto",
