@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.2](https://github.com/collective/volto-mobile-preview/compare/v1.0.1...v1.0.2) (2026-08-19)
+
+### Bug Fixes
+
+* allow Manager role to see the mobile preview toolbar button ([0244ed7](https://github.com/collective/volto-mobile-preview/commit/0244ed7115e6403058fdffca57d0e84118ae07c7))
+
 ## [1.0.1](https://github.com/collective/volto-mobile-preview/compare/v1.0.0...v1.0.1) (2026-08-12)
 
 ### Bug Fixes
