@@ -12,7 +12,7 @@ device sizes.
 ### Features
 
 - Button in the Volto toolbar, available both in edit and view mode
-- Only visible to users with the `Editor` role (configurable, see below)
+- Only visible to users with the `Editor` or `Manager` role (configurable, see below)
 - Preview reflects the saved/published content, not unsaved draft changes
 - Device-size presets (iPhone, iPad, Galaxy, Desktop, ...) or manual width/height in pixels
 - Manual resize by dragging the corner of the preview frame
@@ -23,7 +23,7 @@ device sizes.
 
 ### Configuration
 
-By default, only users with the `Editor` role can see the preview button. Override the list
+By default, only users with the `Editor` or `Manager` role can see the preview button. Override the list
 of allowed roles from your project's own `config.js` (applied after addons):
 
 ```js
