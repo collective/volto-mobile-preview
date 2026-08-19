@@ -9,6 +9,7 @@ const applyConfig = (config) => {
   //   config.settings.mobilePreviewRoles = ['Editor', 'Contributor'];
   config.settings.mobilePreviewRoles = config.settings.mobilePreviewRoles || [
     'Editor',
+    'Manager',
   ];
 
   config.settings.appExtras = [
