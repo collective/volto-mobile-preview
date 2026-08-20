@@ -29,6 +29,8 @@ This product support the following languages:
 
 - Italian
 
+- Spanish
+
 ### Configuration
 
 By default, only users with the `Editor` or `Manager` role can see the preview button. Override the list
