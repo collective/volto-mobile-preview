@@ -21,6 +21,14 @@ device sizes.
   anonymous visitor would see it; on browsers without `credentialless` support the toolbar
   is hidden instead
 
+### Translations
+
+This product support the following languages:
+
+- English
+
+- Italian
+
 ### Configuration
 
 By default, only users with the `Editor` or `Manager` role can see the preview button. Override the list
