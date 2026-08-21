@@ -25,14 +25,15 @@ PLONE_VERSION=6
 VOLTO_VERSION=17.0.0
 
 ADDON_NAME='@plone-collective/volto-mobile-preview'
-ADDON_PATH='@plone-collective/volto-mobile-preview'
+ADDON_PATH='volto-mobile-preview'
+COMPOSE_PROJECT=volto-mobile-preview
 COMPOSE_FILE=dockerfiles/docker-compose.yml
 ACCEPTANCE_COMPOSE=acceptance/docker-compose.yml
 CMD=CURRENT_DIR=${CURRENT_DIR} ADDON_NAME=${ADDON_NAME} ADDON_PATH=${ADDON_PATH} VOLTO_VERSION=${VOLTO_VERSION} PLONE_VERSION=${PLONE_VERSION} docker compose
-DOCKER_COMPOSE=${CMD} -p ${ADDON_PATH} -f ${COMPOSE_FILE}
+DOCKER_COMPOSE=${CMD} -p ${COMPOSE_PROJECT} -f ${COMPOSE_FILE}
 DEV_COMPOSE=COMPOSE_PROFILES=dev ${DOCKER_COMPOSE}
 LIVE_COMPOSE=COMPOSE_PROFILES=dev ${DOCKER_COMPOSE}
-ACCEPTANCE=${CMD} -p ${ADDON_PATH}-acceptance -f ${ACCEPTANCE_COMPOSE}
+ACCEPTANCE=${CMD} -p ${COMPOSE_PROJECT}-acceptance -f ${ACCEPTANCE_COMPOSE}
 
 .PHONY: build-backend
 build-backend: ## Build
