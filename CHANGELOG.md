@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.3](https://github.com/collective/volto-mobile-preview/compare/v1.0.2...v1.0.3) (2026-08-24)
+
+### Bug Fixes
+
+* preview also for home fixed ([a456426](https://github.com/collective/volto-mobile-preview/commit/a45642692875ce40fd50422277b0c118499243b9))
+
+### Maintenance
+
+* add spanish translation, updated the README docs ([9716065](https://github.com/collective/volto-mobile-preview/commit/97160652a2e0e4cbf4abf09df9e896f55eb00faf))
+* updated the README docs ([7178eb9](https://github.com/collective/volto-mobile-preview/commit/7178eb973c5a9d2fe05a0d65c4c5f7cf12bbefde))
+
 ## [1.0.2](https://github.com/collective/volto-mobile-preview/compare/v1.0.1...v1.0.2) (2026-08-19)
 
 ### Bug Fixes
