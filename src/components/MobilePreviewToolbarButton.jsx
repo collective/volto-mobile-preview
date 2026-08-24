@@ -36,7 +36,7 @@ const MobilePreviewToolbarButton = (props) => {
   }, [dispatch, userId]);
 
   const isEditor = userHasRoles(user, config.settings.mobilePreviewRoles);
-  const contentUrl = getBaseUrl(props.pathname);
+  const contentUrl = getBaseUrl(props.pathname) || '/';
   const hasContent = !!content?.['@id'];
 
   if (!isEditor || !hasContent) {
