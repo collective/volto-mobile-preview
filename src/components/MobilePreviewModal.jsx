@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 import { Modal, Dropdown, Input } from 'semantic-ui-react';
 import { Resizable } from 're-resizable';
@@ -78,6 +78,62 @@ const supportsCredentialless =
   typeof document !== 'undefined' &&
   'credentialless' in document.createElement('iframe');
 
+const FOCUSABLE_SELECTOR = [
+  'a[href]',
+  'button:not([disabled])',
+  'input:not([disabled])',
+  'select:not([disabled])',
+  'textarea:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(',');
+
+// semantic-ui-react's Modal (this version) doesn't trap focus at all: on
+// open the focus stays wherever it was, and Tab keeps cycling through the
+// page behind the dialog. This hooks the dialog's own DOM node (found by
+// id, since Modal renders through a portal) to move focus in on open,
+// keep Tab/Shift+Tab cycling inside while it's open, and give focus back
+// to whatever opened it on close.
+const useFocusTrap = (dialogId) => {
+  const previouslyFocused = useRef(null);
+
+  useEffect(() => {
+    const dialog = document.getElementById(dialogId);
+    if (!dialog) {
+      return;
+    }
+
+    previouslyFocused.current = document.activeElement;
+    dialog.focus();
+
+    const handleKeyDown = (event) => {
+      if (event.key !== 'Tab') {
+        return;
+      }
+      const focusable = Array.from(dialog.querySelectorAll(FOCUSABLE_SELECTOR));
+      if (focusable.length === 0) {
+        event.preventDefault();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    dialog.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      dialog.removeEventListener('keydown', handleKeyDown);
+      previouslyFocused.current?.focus();
+    };
+  }, [dialogId]);
+};
+
 const hideToolbarInPreview = (event) => {
   const doc = event.target.contentDocument;
   if (!doc) {
@@ -96,6 +152,8 @@ const MobilePreviewModal = ({ contentUrl, onClose }) => {
   const [selectedDevice, setSelectedDevice] = useState(defaultDevice.id);
   const [width, setWidth] = useState(defaultDevice.width);
   const [height, setHeight] = useState(defaultDevice.height);
+
+  useFocusTrap(MOBILE_PREVIEW_DIALOG_ID);
 
   const selectDevice = (id) => {
     setSelectedDevice(id);
@@ -127,6 +185,7 @@ const MobilePreviewModal = ({ contentUrl, onClose }) => {
       size="large"
       className="mobile-preview-modal"
       id={MOBILE_PREVIEW_DIALOG_ID}
+      tabIndex={-1}
       role="dialog"
       aria-modal="true"
       aria-labelledby={TITLE_ID}
