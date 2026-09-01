@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.4](https://github.com/collective/volto-mobile-preview/compare/v1.0.3...v1.0.4) (2026-09-01)
+
+### Bug Fixes
+
+* trap keyboard focus inside the mobile preview dialog ([3c1137d](https://github.com/collective/volto-mobile-preview/commit/3c1137df2f610125f6c390f32c945f1220115702))
+
 ## [1.0.3](https://github.com/collective/volto-mobile-preview/compare/v1.0.2...v1.0.3) (2026-08-24)
 
 ### Bug Fixes
