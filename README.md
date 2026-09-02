@@ -16,10 +16,10 @@ device sizes.
 - Preview reflects the saved/published content, not unsaved draft changes
 - Device-size presets (iPhone, iPad, Galaxy, Desktop, ...) or manual width/height in pixels
 - Manual resize by dragging the corner of the preview frame
-- The previewed page loads without the editing toolbar: on Chrome/Edge it loads with
-  `credentialless`, i.e. without forwarding cookies/session, so it renders exactly as an
-  anonymous visitor would see it; on browsers without `credentialless` support the toolbar
-  is hidden instead
+- The previewed page loads in the current session (same permissions as the rest of the
+  admin UI) with the editing toolbar hidden, so it's meant for editors/managers checking
+  layout and responsive behaviour while working, not for auditing what an anonymous
+  visitor would see
 
 ### Translations
 

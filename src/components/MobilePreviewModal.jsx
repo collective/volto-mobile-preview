@@ -68,25 +68,6 @@ const deviceOptions = (intl) => [
   },
 ];
 
-// `credentialless` (Chrome/Edge only, as of writing) loads the iframe
-// without forwarding cookies/storage, so Volto renders it exactly as an
-// anonymous visitor would see it (no editing toolbar) - no CSS hiding
-// needed. Browsers without support (Firefox, Safari) fall back to a normal
-// same-origin, cookie-forwarded load, so the toolbar has to be hidden by
-// reaching into the (same-origin) iframe document once it has loaded.
-const supportsCredentialless =
-  typeof document !== 'undefined' &&
-  'credentialless' in document.createElement('iframe');
-
-// On environments gated by an SSO/access-manager (typical of staging, ahead
-// of publishing), a cookie-less `credentialless` request has no session to
-// present, gets redirected to the gateway's own login page, and that page
-// refuses to be framed (X-Frame-Options). Browsers don't fire a `load` or
-// `error` event on the iframe for that: the frame is simply left blank.
-// Give it a few seconds, then fall back to the cookie-forwarded load used
-// for browsers that don't support `credentialless` at all.
-const CREDENTIALLESS_LOAD_TIMEOUT = 6000;
-
 const FOCUSABLE_SELECTOR = [
   'a[href]',
   'button:not([disabled])',
@@ -143,6 +124,14 @@ const useFocusTrap = (dialogId) => {
   }, [dialogId]);
 };
 
+// The iframe shares the current session (same origin, cookies forwarded
+// as normal), so Volto renders its own editing toolbar/sidebar inside the
+// preview too. Reach in and hide them once the preview document has
+// loaded - this shows the editor's own view of the content (same
+// permissions as the rest of the admin UI), not a truly anonymous one.
+// That's fine: the preview is for editors/managers checking layout and
+// responsive behaviour while working, not for auditing what an anonymous
+// visitor would see.
 const hideToolbarInPreview = (event) => {
   const doc = event.target.contentDocument;
   if (!doc) {
@@ -161,27 +150,6 @@ const MobilePreviewModal = ({ contentUrl, onClose }) => {
   const [selectedDevice, setSelectedDevice] = useState(defaultDevice.id);
   const [width, setWidth] = useState(defaultDevice.width);
   const [height, setHeight] = useState(defaultDevice.height);
-  const [cookieFallback, setCookieFallback] = useState(false);
-  const loadTimeoutRef = useRef(null);
-
-  const useCredentialless = supportsCredentialless && !cookieFallback;
-
-  useEffect(() => {
-    if (!useCredentialless) {
-      return;
-    }
-    loadTimeoutRef.current = setTimeout(() => {
-      setCookieFallback(true);
-    }, CREDENTIALLESS_LOAD_TIMEOUT);
-    return () => clearTimeout(loadTimeoutRef.current);
-  }, [useCredentialless, contentUrl]);
-
-  const handleFrameLoad = (event) => {
-    clearTimeout(loadTimeoutRef.current);
-    if (!useCredentialless) {
-      hideToolbarInPreview(event);
-    }
-  };
 
   useFocusTrap(MOBILE_PREVIEW_DIALOG_ID);
 
@@ -290,13 +258,11 @@ const MobilePreviewModal = ({ contentUrl, onClose }) => {
             className="mobile-preview-resizable"
           >
             <iframe
-              key={useCredentialless ? 'credentialless' : 'cookie-fallback'}
               id={FRAME_ID}
               src={contentUrl}
               title={intl.formatMessage(messages.title)}
               className="mobile-preview-iframe"
-              credentialless={useCredentialless ? 'true' : undefined}
-              onLoad={handleFrameLoad}
+              onLoad={hideToolbarInPreview}
             />
           </Resizable>
         </div>
