@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.5](https://github.com/collective/volto-mobile-preview/compare/v1.0.4...v1.0.5) (2026-09-02)
+
+### Bug Fixes
+
+* fall back to cookie-forwarded load when the anonymous credentialless preview is blocked (e.g. X-Frame-Options on SSO-gated staging) ([998b9c6](https://github.com/collective/volto-mobile-preview/commit/998b9c6c2a0db4ab638bf6aab098bc45bc203fd8))
+
 ## [1.0.4](https://github.com/collective/volto-mobile-preview/compare/v1.0.3...v1.0.4) (2026-09-01)
 
 ### Bug Fixes
