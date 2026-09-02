@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.6](https://github.com/collective/volto-mobile-preview/compare/v1.0.5...v1.0.6) (2026-09-02)
+
+### Bug Fixes
+
+* remove anonymous credentialless preview, always load with the current session ([cf27437](https://github.com/collective/volto-mobile-preview/commit/cf2743725d16ffa8ce454e92583a5a66e5c76c55))
+
 ## [1.0.5](https://github.com/collective/volto-mobile-preview/compare/v1.0.4...v1.0.5) (2026-09-02)
 
 ### Bug Fixes
